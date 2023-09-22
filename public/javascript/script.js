@@ -158,8 +158,7 @@ function ballBoundaries() {
 function animate() {
   ballMove();
   renderCanvas();
-  ballBoundaries();
-  window.requestAnimationFrame(animate);
+  socket.emit('ready');
 }
 
 // Start Game, Reset Everything
@@ -185,3 +184,6 @@ function startGame() {
 
 // On Load
 startGame();
+socket.on('connect', () => {
+  console.log(`connected as ${socket.id}`);
+});
