@@ -14,8 +14,9 @@ httpServer.listen(PORT, () => {
 //import sockets from './sockets.js';
 //sockets.listen(socketServer); // replaces following lines
 let readyPlayerCount = 0;
+const pongNamespace = socketServer.of('/pong');
 
-socketServer.on('connection', (socket) => {
+pongNamespace.on('connection', (socket) => {
   console.warn(`... a user is connected via websockets id: ${socket.id} `);
 
   socket.on('ready', () => {
@@ -24,7 +25,7 @@ socketServer.on('connection', (socket) => {
     readyPlayerCount++;
 
     if (readyPlayerCount % 2 === 0) {
-      socketServer.emit('startGame', socket.id);
+      pongNamespace.emit('startGame', socket.id);
     }
   })
 

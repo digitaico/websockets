@@ -1,6 +1,7 @@
 let readyPlayerCount = 0;
 
 function listen(io) {
+  const pongNamespace = io.of('/pong');
   io.on('connection', (socket) => {
     console.warn(`... a user is connected via websockets id: ${socket.id} `);
 
