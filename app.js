@@ -3,24 +3,22 @@ import cors from 'cors';
 import helmet from 'helmet';
 import path from 'path';
 import {fileURLToPath} from 'url';
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const app = express();
+const apiServer = express();
 
-app.use(cors());
-app.use(helmet({
+apiServer.use(cors());
+apiServer.use(helmet({
   contentSecurityPolicy: {
     directives: {
       "script-src": ["'self'", "cdnjs.cloudflare.com"],
     },
   },
 }));
-app.use(express.json());
+apiServer.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'public')));
+apiServer.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', express.static('index.html'));
+apiServer.get('/', express.static('index.html'));
 
-export default app;
-
+export default apiServer;
